@@ -1,0 +1,6 @@
+%{
+  typed_struct:
+    {:hex, :typed_struct, "0.1.4",
+     "25971ce73a8b336dedf2f80e4dafaab111af127ba4773955b66805c89e197f6a", [:mix], [], "hexpm",
+     "c48b743b1812189431e0280941790af150ae5372f7ac51e7097c03a261a35bd6"}
+}
