@@ -2,7 +2,7 @@
 
 QUIC Implementation in Elixir, **WIP really early stages not usable yet**
 
-It shares the same api and implementation as (quiche)[https://github.com/cloudflare/quiche] by cloudflare
+It shares the same api and implementation as [quiche](https://github.com/cloudflare/quiche) by cloudflare
 
 ## Installation
 
