@@ -8,7 +8,7 @@ defmodule Alcyone.Crypto do
   """
   alias Alcyone.Crypto.Hkdf
 
-  alias Alcyone.Crypto.Aead.{Open, Seal}
+  alias Alcyone.Crypto.Aead.{Open, Seal, Keys}
 
   # https://quicwg.org/base-drafts/draft-ietf-quic-tls.html#name-initial-secrets
   @initial_salf <<0xC3, 0xEE, 0xF7, 0x12, 0xC7, 0x2E, 0xBB, 0x5A, 0x11, 0xA7, 0xD2, 0x43, 0x2B,
@@ -36,7 +36,7 @@ defmodule Alcyone.Crypto do
     key_len = @aes128_gcm_key_len
     nonce_len = @aes128_gcm_nonce_len
 
-    # derived from aes128 gcm
+    # derived from HKDF
     hash_type = :sha256
 
     initial_secret = derive_initial_secret(dcid)
@@ -57,14 +57,14 @@ defmodule Alcyone.Crypto do
 
     # todo, quic header protection key creation!
     if is_server? do
-      {
-        Open.new(:aes_128_gcm, client_key, client_iv, client_hp_key),
-        Seal.new(:aes_128_gcm, server_key, server_iv, server_hp_key)
+      %Keys{
+        open: Open.new(:aes_128_gcm, client_key, client_iv, client_hp_key),
+        seal: Seal.new(:aes_128_gcm, server_key, server_iv, server_hp_key)
       }
     else
-      {
-        Open.new(:aes_128_gcm, server_key, server_iv, server_hp_key),
-        Seal.new(:aes_128_gcm, client_key, client_iv, client_hp_key)
+      %Keys{
+        open: Open.new(:aes_128_gcm, server_key, server_iv, server_hp_key),
+        seal: Seal.new(:aes_128_gcm, client_key, client_iv, client_hp_key)
       }
     end
   end

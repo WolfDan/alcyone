@@ -1,4 +1,4 @@
-defmodule Alcyone.Header.Initial do
+defmodule Alcyone.Header.Types.Initial do
   @moduledoc """
   Represents the Initial packet
   """
@@ -11,7 +11,7 @@ defmodule Alcyone.Header.Initial do
     field :token, binary(), enforce: true
 
     # the amount of read bytes, we do this to avoid allocating the remaining bytes after reading the non encrypted packet
-    field :bytes_read, non_neg_integer()
+    field :bytes_read, non_neg_integer(), enforce: true
 
     # decrypt only
     field :packet_number_length, non_neg_integer()

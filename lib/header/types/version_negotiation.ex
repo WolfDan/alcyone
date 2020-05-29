@@ -1,4 +1,4 @@
-defmodule Alcyone.Header.VersionNegotiation do
+defmodule Alcyone.Header.Types.VersionNegotiation do
   @moduledoc """
   Represents the version negotiation header packet
   """
